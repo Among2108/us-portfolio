@@ -24,7 +24,7 @@ export default function VantaHalo({ className = "", children }) {
       minHeight: 200.0,
       minWidth: 200.0,
       baseColor: 0x2b3869,
-      backgroundColor: 0x000000,
+      backgroundColor: 0xe2ee1,
       amplitudeFactor: 0.4,
       size: 2.0,
     });
