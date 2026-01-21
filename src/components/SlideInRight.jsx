@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 export default function SlideInRight({
   children,
   distance = 80,
-  threshold = 0.2,
+  threshold = 0.5,
   duration = 1200,
   delay = 0,
   easing = "ease-out",

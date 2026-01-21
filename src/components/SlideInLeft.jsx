@@ -1,27 +1,39 @@
 import { useEffect, useRef, useState } from "react";
 
-function SlideInLeft({ children, distance = 80 }) {
+export default function SlideInLeft({
+  children,
+  distance = 80,
+  threshold = 0.5,
+  duration = 1200,
+  delay = 0,
+  easing = "ease-out",
+}) {
   const ref = useRef(null);
   const [show, setShow] = useState(false);
 
   useEffect(() => {
     const obs = new IntersectionObserver(
       ([e]) => e.isIntersecting && setShow(true),
-      { threshold: 0.2 }
+      { threshold }
     );
     if (ref.current) obs.observe(ref.current);
     return () => obs.disconnect();
-  }, []);
+  }, [threshold]);
 
   return (
     <div
       ref={ref}
-      className={`transition-all duration-1000 ease-out
-        ${show ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-[80px]"}
-      `}
+      style={{
+        opacity: show ? 1 : 0,
+        // 🔽 เปลี่ยนตรงนี้: จาก +distance เป็น -distance
+        transform: show ? "translateX(0px)" : `translateX(-${distance}px)`,
+        transitionProperty: "transform, opacity",
+        transitionDuration: `${duration}ms`,
+        transitionDelay: `${delay}ms`,
+        transitionTimingFunction: easing,
+      }}
     >
       {children}
     </div>
   );
-};
-export default SlideInLeft;
+}
