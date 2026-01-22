@@ -5,9 +5,66 @@ import SlideInLeft from "../components/SlideInLeft";
 import SlideInRight from "../components/SlideInRight";
 import { useRef } from "react";
 import { FaDownLong } from "react-icons/fa6";
+import { FaLightbulb } from "react-icons/fa";
+import { Badge } from "@/components/ui/badge";
+import { FiStar } from "react-icons/fi";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardAction,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import SkillCart from "@/components/SkillCart";
+
 const Home = () => {
+  const textex = "Experience";
   const text = "I'm US";
   const contentRef = useRef(null);
+  const skill = [
+    { name: "HTML", pic: "/HTML.png" },
+    { name: "CSS", pic: "/CSS.png" },
+    { name: "Java", pic: "/Java.jpg" },
+    { name: "Tailwind", pic: "/Tailwind.png" },
+    { name: "React", pic: "/React.png" },
+    { name: "Nodejs", pic: "/node-new.png" },
+    { name: "Expressjs", pic: "/1_HkM78Z1G5UKqQNCHwBHRfA.png" },
+    { name: "Figma", pic: "/Figma.webp" },
+  ];
+
+ const handleAddToCart = (skill) => {
+  // 1. ดึงข้อมูลเก่าจาก localStorage
+  const stored = JSON.parse(localStorage.getItem("skills")) || [];
+
+  // 2. เช็คว่ามี skill นี้แล้วหรือยัง
+  const exists = stored.find(item => item.name === skill.name);
+
+  if (exists) {
+    alert("มี skill นี้อยู่แล้ว");
+    return;
+  }
+
+  // 3. เพิ่ม skill ใหม่
+  stored.push(skill);
+
+  // 4. เซฟกลับเข้า localStorage
+  localStorage.setItem("skills", JSON.stringify(stored));
+
+  alert(`เพิ่ม ${skill.name} แล้ว`);
+};
+
+
+
 
   return (
     <>
@@ -69,7 +126,17 @@ const Home = () => {
             </div>
           </div>
           <div className="h-full pt-10 ">
-            <h2 className="text-center">Experience</h2>
+            <h2 className="text-center text-4xl font-bold">
+              {textex.split("").map((char, index) => (
+                <span
+                  key={index}
+                  className="rainbow-char"
+                  style={{ animationDelay: `${index * 0.15}s` }}
+                >
+                  {char}
+                </span>
+              ))}
+            </h2>
             <div className=" pt-10 pr-5 pl-5">
               <div className="w-full flex justify-between gap-10 ">
                 {/* เส้นแสดงปี */}
@@ -88,48 +155,53 @@ const Home = () => {
                   <section className="rounded-xl  p-6 shadow-sm">
                     <SlideInLeft>
                       <div className="h-dvh flex gap-3  items-center ">
-                      <img src="/Which Apple Products Are Really Worth Your Money_ (Updated).jpg" alt="" className="w-1/2 rounded-4xl" />
-                      <div className="">
-                        <h3 className="text-2xl text-blue-300 font-semibold">
-                          Icare (Apple Provider)
-                        </h3>
-                        <p className="mt-2 text-white  ">
-                          Provided customer service and administrative support
-                          at an Apple service center Diagnosed and repaired
-                          iPhone hardware issues following service procedures
-                          Managed repair records, customer data, and service
-                          documentation Communicated with customers to explain
-                          technical issues and repair solutions Developed strong
-                          problem-solving, attention to detail, and service
-                          mindset
-                        </p>
+                        <img
+                          src="/Which Apple Products Are Really Worth Your Money_ (Updated).jpg"
+                          alt=""
+                          className="w-1/2 rounded-4xl"
+                        />
+                        <div className="">
+                          <h3 className="text-3xl text-blue-300 font-semibold">
+                            Icare (Apple Provider)
+                          </h3>
+                          <p className="mt-2 text-xl text-white  ">
+                            Provided customer service and administrative support
+                            at an Apple service center Diagnosed and repaired
+                            iPhone hardware issues following service procedures
+                            Managed repair records, customer data, and service
+                            documentation Communicated with customers to explain
+                            technical issues and repair solutions Developed
+                            strong problem-solving, attention to detail, and
+                            service mindset
+                          </p>
+                        </div>
                       </div>
-                    </div>
                     </SlideInLeft>
                     <SlideInRight>
-
-                    
-                    <div className="h-dvh flex gap-3  items-center">
-                      <div className="ml-auto ">
-                        <h3 className="text-2xl text-blue-300 font-semibold text-right">
-                          Genaration Thailand
-                        </h3>
-                        <p className="mt-2 text-white  ml-auto text-right">
-                          Generation Bootcamp Thailand My experience at
-                          Generation Thailand Bootcamp provided a strong
-                          foundation for my journey as a Junior Software
-                          Developer. I gained hands-on experience in building
-                          web applications with JavaScript and React, practiced
-                          real-world development workflows using Git, and
-                          collaborated on team projects. The program also
-                          strengthened my problem-solving, communication, and
-                          adaptability, preparing me to grow confidently in a
-                          professional software development environment.
-                        </p>
-                        
+                      <div className="h-dvh flex gap-3  items-center">
+                        <div className="ml-auto ">
+                          <h3 className="text-3xl text-blue-300 font-semibold text-right">
+                            Genaration Thailand
+                          </h3>
+                          <p className="mt-2 text-xl text-white  ml-auto text-right">
+                            Generation Bootcamp Thailand My experience at
+                            Generation Thailand Bootcamp provided a strong
+                            foundation for my journey as a Junior Software
+                            Developer. I gained hands-on experience in building
+                            web applications with JavaScript and React,
+                            practiced real-world development workflows using
+                            Git, and collaborated on team projects. The program
+                            also strengthened my problem-solving, communication,
+                            and adaptability, preparing me to grow confidently
+                            in a professional software development environment.
+                          </p>
+                        </div>
+                        <img
+                          src="/032.png"
+                          alt=""
+                          className="w-1/2 rounded-4xl"
+                        />
                       </div>
-                       <img src="/032.png" alt="" className="w-1/2 rounded-4xl" />
-                    </div>
                     </SlideInRight>
                   </section>
                 </div>
@@ -137,6 +209,47 @@ const Home = () => {
             </div>
           </div>
         </ScrollReveal>
+        <div className="h-[20dvh]"></div>
+        <section className="skill">
+          <div className="">
+            <div className="flex justify-center gap-3">
+              <h2 className="">skill</h2>
+              <Dialog className="">
+                <DialogTrigger asChild>
+                  <button
+                    className=" my-auto h-20 w-20inline-flex items-center justify-center">
+                    <FaLightbulb className="size-17 text-yellow-400" />
+                  </button>
+                </DialogTrigger>
+                <DialogContent
+                  showCloseButton={false}
+                  className="w-[80vw] max-w-[900px] sm:max-w-[900px]"
+                >
+                  <DialogDescription>
+                    <SkillCart />
+                  </DialogDescription>
+                </DialogContent>
+              </Dialog>
+            </div>
+            <ul className="  flex justify-center gap-4 flex-wrap mt-30 w-[60%] mx-auto">
+              {skill.map((i,index) => (
+                <li key={index}>
+                  <Card className="relative mx-auto h-80  w-60 max-w-50 ">
+                    <img src={i.pic} alt="Event cover" className=" w-50 h-40" />
+                    <CardHeader>
+                      <CardTitle>{i.name}</CardTitle>
+                    </CardHeader>
+                    <CardFooter>
+                      <Button className="w-full  hover:text-amber-300" onClick={() => handleAddToCart(i)}><FiStar className="size-5" />
+
+                      </Button>
+                    </CardFooter>
+                  </Card>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
       </main>
     </>
   );

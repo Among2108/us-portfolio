@@ -72,11 +72,11 @@ export default function ScrollTimelineIndicator({
         </div>
 
         {/* BASE LINE */}
-        <div className="absolute left-1/2 top-0 h-full w-[6px] -translate-x-1/2 rounded-full bg-white/20" />
+        <div className="absolute left-1/2 top-0 h-full w-[15px] -translate-x-1/2 rounded-full bg-white/20" />
 
         {/* PROGRESS LINE (gradient) */}
         <div
-          className="absolute left-1/2 top-0 w-[6px] -translate-x-1/2 rounded-full bg-gradient-to-b from-sky-300 via-fuchsia-300 to-amber-200"
+          className="absolute left-1/2 top-0 w-[15px] -translate-x-1/2 rounded-full bg-gradient-to-b from-sky-300 via-fuchsia-300 to-amber-200"
           style={{ height: `${progress * 100}%` }}
         />
 
