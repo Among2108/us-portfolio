@@ -62,40 +62,43 @@ const Home = () => {
   };
   const [show, setShow] = useState(false);
   const [locked, setLocked] = useState(true);
-  // useEffect(() => {
-  //   document.body.style.overflow = "hidden";
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
 
-  //   const timer = setTimeout(() => {
-  //     document.body.style.overflow = "";
-  //     setLocked(false);
-  //     setShow(true);
-  //   }, 4000);
+    const timer = setTimeout(() => {
+      document.body.style.overflow = "";
+      setLocked(false);
+      setShow(true);
+    }, 4000);
 
-  //   return () => {
-  //     clearTimeout(timer);
-  //     document.body.style.overflow = "";
-  //   };
-  // }, []);
+    return () => {
+      clearTimeout(timer);
+      document.body.style.overflow = "";
+    };
+  }, []);
 
-  // ❌ กัน wheel/touch ระหว่าง lock (สำคัญกับ trackpad)
-  // useEffect(() => {
-  //   const prevent = (e) => {
-  //     if (locked) e.preventDefault();
-  //   };
+  
+  useEffect(() => {
+    const prevent = (e) => {
+      if (locked) e.preventDefault();
+    };
 
-  //   window.addEventListener("wheel", prevent, { passive: false });
-  //   window.addEventListener("touchmove", prevent, { passive: false });
+    window.addEventListener("wheel", prevent, { passive: false });
+    window.addEventListener("touchmove", prevent, { passive: false });
 
-  //   return () => {
-  //     window.removeEventListener("wheel", prevent);
-  //     window.removeEventListener("touchmove", prevent);
-  //   };
-  // }, [locked]);
+    return () => {
+      window.removeEventListener("wheel", prevent);
+      window.removeEventListener("touchmove", prevent);
+    };
+  }, [locked]);
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => setShow(true), 5000);
-  //   return () => clearTimeout(timer);
-  // }, []);
+  useEffect(() => {
+    const timer = setTimeout(() => setShow(true), 5000);
+    return () => clearTimeout(timer);
+  }, []);
+
+
+
 
   return (
     <>

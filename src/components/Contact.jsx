@@ -34,7 +34,7 @@ const Contact = () => {
   // ✅ ประกาศ autoplay ให้เรียบร้อย
   const autoplay = useRef(
     Autoplay({
-      delay: 2500,
+      delay: 500,
       stopOnInteraction: false,
       stopOnMouseEnter: true,
     }),
@@ -59,13 +59,23 @@ const Contact = () => {
 
       {/* Content */}
       <div className="relative z-10 min-h-[80dvh] flex flex-col items-center justify-around text-white px-4">
-        <h2 className="text-4xl font-bold">Contact Me!!</h2>
-        <div className="flex flex-col justify-center items-center">
-         <FaArrowCircleLeft className="size-10 animate-arrowRight" />
+        <h2 className="text-4xl text-rose-400 font-bold flex gap-1 ">
+         {"Contact Me!!".split("").map((c, i) => (
+    <span
+      key={i}
+      className="inline-block animate-jump"
+      style={{ animationDelay: `${i * 0.1}s` }}
+    >
+      {c === " " ? "\u00A0" : c}
+    </span>
+  ))}
+        </h2>
+        <div className="flex flex-col justify-center items-center gap-3">
+          <FaArrowCircleLeft className="size-10 animate-arrowRight" />
           <Carousel
             className="w-full max-w-5xl "
             plugins={[autoplay.current]}
-            opts={{  loop: true }}
+            opts={{ loop: true }}
           >
             <CarouselContent className="-mt-1">
               {logo.map((i, index) => (
@@ -90,11 +100,8 @@ const Contact = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-
-           
-            
           </Carousel>
-          <FaArrowCircleRight className="size-10" />
+          <FaArrowCircleRight className="size-10 animate-arrowRight" />
         </div>
       </div>
     </section>

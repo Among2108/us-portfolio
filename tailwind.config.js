@@ -1,9 +1,8 @@
+import { ArrowLeft } from "lucide-react";
+
 // tailwind.config.js
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       keyframes: {
@@ -11,9 +10,14 @@ export default {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(32px)" },
         },
+        arrowLeft: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-32px)" },
+        },
       },
       animation: {
         arrowRight: "arrowRight 1s ease-in-out infinite alternate",
+        arrowLeft: "arrowLeft 1s ease-in-out infinite alternate",
       },
     },
   },
