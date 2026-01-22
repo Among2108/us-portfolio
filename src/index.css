@@ -110,7 +110,7 @@
     color: #a855f7; /* purple */
   }
   100% {
-    color: #ef4444;
+    color: #44dbef;
   }
 }
 
@@ -124,7 +124,7 @@ h2  {
   font-weight: 500;
   font-style: italic;
   font-size: 60px;
-  color:#7d74ff ;
+  color:#70caff ;
 }
 
 a {

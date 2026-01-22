@@ -1,31 +1,26 @@
+import { useRef } from "react";
 import VantaHalo from "../components/VantaHalo";
+import VantaClouds from "@/components/VantaClouds";
+import VantaBirds from "../components/VantaBirds";
 import ScrollTimelineIndicator from "../components/ScrollTimelineIndicator";
 import ScrollReveal from "../components/ScrollReveal";
 import SlideInLeft from "../components/SlideInLeft";
 import SlideInRight from "../components/SlideInRight";
-import { useRef } from "react";
-import { FaDownLong } from "react-icons/fa6";
-import { FaLightbulb } from "react-icons/fa";
-import { Badge } from "@/components/ui/badge";
-import { FiStar } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardAction,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { toast } from "sonner";
 import SkillCart from "@/components/SkillCart";
+import { FaDownLong } from "react-icons/fa6";
+import { FaLightbulb } from "react-icons/fa";
+import { FiStar } from "react-icons/fi";
+import { GiBrain } from "react-icons/gi";
+import { IoPawSharp } from "react-icons/io5";
 
 const Home = () => {
   const textex = "Experience";
@@ -42,34 +37,36 @@ const Home = () => {
     { name: "Figma", pic: "/Figma.webp" },
   ];
 
- const handleAddToCart = (skill) => {
-  // 1. ดึงข้อมูลเก่าจาก localStorage
-  const stored = JSON.parse(localStorage.getItem("skills")) || [];
+  const handleAddToCart = (skill) => {
+    // 1. ดึงข้อมูลเก่าจาก localStorage
+    const stored = JSON.parse(localStorage.getItem("skills")) || [];
 
-  // 2. เช็คว่ามี skill นี้แล้วหรือยัง
-  const exists = stored.find(item => item.name === skill.name);
+    // 2. เช็คว่ามี skill นี้แล้วหรือยัง
+    const exists = stored.find((item) => item.name === skill.name);
 
-  if (exists) {
-    alert("มี skill นี้อยู่แล้ว");
-    return;
-  }
+    if (exists) {
+      toast.warning("Skill นี้ถูกเพิ่มแล้ว", {
+        description: skill.name,
+      });
+      return;
+    }
 
-  // 3. เพิ่ม skill ใหม่
-  stored.push(skill);
+    // 3. เพิ่ม skill ใหม่
+    stored.push(skill);
 
-  // 4. เซฟกลับเข้า localStorage
-  localStorage.setItem("skills", JSON.stringify(stored));
+    // 4. เซฟกลับเข้า localStorage
+    localStorage.setItem("skills", JSON.stringify(stored));
 
-  alert(`เพิ่ม ${skill.name} แล้ว`);
-};
-
-
-
+    toast.success("เพิ่ม Skill สำเร็จ 🎉", {
+      description: skill.name,
+    });
+  };
 
   return (
     <>
       <header>
-        <VantaHalo className="h-screen w-full">
+        {/* <VantaHalo className="h-screen w-full"> */}
+        <VantaBirds className="h-full w-full ">
           <div className="flex h-screen items-center justify-center">
             <h1 className="present text-8xl font-bold text-white">
               {text.split("").map((c, i) => (
@@ -83,11 +80,12 @@ const Home = () => {
               ))}
             </h1>
           </div>
-        </VantaHalo>
+          {/* </VantaHalo> */}
+        </VantaBirds>
       </header>
       <main className="bg-black">
-        <div className="h-[80dvh] flex justify-center items-center ">
-          <div className="text-5xl text-white flex animate-[blink_1s_infinite] ">
+        <div className="h-[60dvh] flex justify-center items-center ">
+          <div className="text-5xl text-teal-100 flex animate-[blink_1s_infinite] ">
             <FaDownLong />
             <p className=" text-center "> keep scolling down </p>
             <FaDownLong />
@@ -210,47 +208,98 @@ const Home = () => {
           </div>
         </ScrollReveal>
         <div className="h-[20dvh]"></div>
-        <section className="skill">
-          <div className="">
-            <div className="flex justify-center gap-3">
-              <h2 className="">skill</h2>
-              <Dialog className="">
-                <DialogTrigger asChild>
-                  <button
-                    className=" my-auto h-20 w-20inline-flex items-center justify-center">
-                    <FaLightbulb className="size-17 text-yellow-400" />
-                  </button>
-                </DialogTrigger>
-                <DialogContent
-                  showCloseButton={false}
-                  className="w-[80vw] max-w-[900px] sm:max-w-[900px]"
-                >
-                  <DialogDescription>
-                    <SkillCart />
-                  </DialogDescription>
-                </DialogContent>
-              </Dialog>
+        <VantaBirds className="h-full w-full ">
+          <section className="skill">
+            <div className=" h-screen">
+              <div className="flex justify-center gap-3">
+                <h2 className="">skill</h2>
+                <Dialog className="">
+                  <DialogTrigger asChild>
+                    <button className=" my-auto h-20 w-20inline-flex items-center justify-center">
+                      <GiBrain className="size-17 text-rose-400" />
+                    </button>
+                  </DialogTrigger>
+                  <DialogContent
+                    showCloseButton={false}
+                    className="w-[80vw] max-w-[900px] sm:max-w-[900px]"
+                  >
+                    <DialogDescription>
+                      <SkillCart />
+                    </DialogDescription>
+                  </DialogContent>
+                </Dialog>
+              </div>
+              <ul className="  flex justify-center gap-4 flex-wrap mt-30 w-[60%] mx-auto">
+                {skill.map((i, index) => (
+                  <li key={index}>
+                    <Card className="relative mx-auto h-80  w-60 max-w-50 ">
+                      <img
+                        src={i.pic}
+                        alt="Event cover"
+                        className=" w-50 h-40"
+                      />
+                      <CardHeader>
+                        <CardTitle>{i.name}</CardTitle>
+                      </CardHeader>
+                      <CardFooter>
+                        <Button
+                          className="w-full  hover:text-amber-300"
+                          onClick={() => handleAddToCart(i)}
+                        >
+                          <FiStar className="size-5" />
+                        </Button>
+                      </CardFooter>
+                    </Card>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <ul className="  flex justify-center gap-4 flex-wrap mt-30 w-[60%] mx-auto">
-              {skill.map((i,index) => (
-                <li key={index}>
-                  <Card className="relative mx-auto h-80  w-60 max-w-50 ">
-                    <img src={i.pic} alt="Event cover" className=" w-50 h-40" />
-                    <CardHeader>
-                      <CardTitle>{i.name}</CardTitle>
-                    </CardHeader>
-                    <CardFooter>
-                      <Button className="w-full  hover:text-amber-300" onClick={() => handleAddToCart(i)}><FiStar className="size-5" />
-
-                      </Button>
-                    </CardFooter>
-                  </Card>
-                </li>
-              ))}
-            </ul>
+            <div className="h-[20dvh]"></div>
+          </section>
+        </VantaBirds>
+        <section className="Myprojec h-screen">
+          <div className=" ">
+            <div className="text-center ">
+              <span className="text-pink-300 text-5xl font-bold flex justify-center gap-2 "><IoPawSharp />Maipaws Project<IoPawSharp /></span>
+              <p className="w-1/2 mx-auto text-amber-50 pt-5">
+                MaiPaws is a full-stack pet e-commerce web application designed
+                with a strong focus on user experience and brand identity. The
+                platform features a modern, pet-centric interface with clearly
+                separated categories for dogs, cats, birds, and fish, allowing
+                users to browse and shop effortlessly. The front end is built
+                with React, Vite, and Tailwind CSS, emphasizing reusable
+                components, smooth animations, and responsive design. To enhance
+                visual engagement, the website includes interactive background
+                animations and micro-interactions that create a premium, lively
+                shopping experience. On the back end, MaiPaws uses Node.js,
+                Express, and MongoDB with a RESTful API architecture. The system
+                supports authentication and authorization with JWT, role-based
+                access control for admin and users, product management, image
+                uploads, cart handling, and order processing. This project was
+                developed using an Agile workflow with Git-based version
+                control, reflecting real-world team collaboration and
+                production-ready practices.
+              </p>
+            </div>
+            <div className="flex justify-center pt-10">
+              <a href="https://jsd-project-group-2.vercel.app/" target="blank">
+              <video
+                className="max-h-[60dvh] rounded-4xl"
+                src="/maipaws.mp4"
+                autoPlay
+                loop
+                muted
+                preload="auto"
+                playsInline
+              ></video>
+              </a>
+            </div>
           </div>
         </section>
       </main>
+      <footer>
+        <section className="Contect"></section>
+      </footer>
     </>
   );
 };
