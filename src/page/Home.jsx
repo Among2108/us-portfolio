@@ -1,11 +1,11 @@
-import { useRef } from "react";
-import VantaHalo from "../components/VantaHalo";
-import VantaClouds from "@/components/VantaClouds";
+import { useRef, useEffect, useState } from "react";
 import VantaBirds from "../components/VantaBirds";
 import ScrollTimelineIndicator from "../components/ScrollTimelineIndicator";
 import ScrollReveal from "../components/ScrollReveal";
 import SlideInLeft from "../components/SlideInLeft";
 import SlideInRight from "../components/SlideInRight";
+import Contact from "@/components/contact";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -21,7 +21,7 @@ import { FaLightbulb } from "react-icons/fa";
 import { FiStar } from "react-icons/fi";
 import { GiBrain } from "react-icons/gi";
 import { IoPawSharp } from "react-icons/io5";
-
+import { FaArrowUp } from "react-icons/fa";
 const Home = () => {
   const textex = "Experience";
   const text = "I'm US";
@@ -36,7 +36,6 @@ const Home = () => {
     { name: "Expressjs", pic: "/1_HkM78Z1G5UKqQNCHwBHRfA.png" },
     { name: "Figma", pic: "/Figma.webp" },
   ];
-
   const handleAddToCart = (skill) => {
     // 1. ดึงข้อมูลเก่าจาก localStorage
     const stored = JSON.parse(localStorage.getItem("skills")) || [];
@@ -61,30 +60,72 @@ const Home = () => {
       description: skill.name,
     });
   };
+  const [show, setShow] = useState(false);
+  const [locked, setLocked] = useState(true);
+  // useEffect(() => {
+  //   document.body.style.overflow = "hidden";
+
+  //   const timer = setTimeout(() => {
+  //     document.body.style.overflow = "";
+  //     setLocked(false);
+  //     setShow(true);
+  //   }, 4000);
+
+  //   return () => {
+  //     clearTimeout(timer);
+  //     document.body.style.overflow = "";
+  //   };
+  // }, []);
+
+  // ❌ กัน wheel/touch ระหว่าง lock (สำคัญกับ trackpad)
+  // useEffect(() => {
+  //   const prevent = (e) => {
+  //     if (locked) e.preventDefault();
+  //   };
+
+  //   window.addEventListener("wheel", prevent, { passive: false });
+  //   window.addEventListener("touchmove", prevent, { passive: false });
+
+  //   return () => {
+  //     window.removeEventListener("wheel", prevent);
+  //     window.removeEventListener("touchmove", prevent);
+  //   };
+  // }, [locked]);
+
+  // useEffect(() => {
+  //   const timer = setTimeout(() => setShow(true), 5000);
+  //   return () => clearTimeout(timer);
+  // }, []);
 
   return (
     <>
       <header>
-        {/* <VantaHalo className="h-screen w-full"> */}
         <VantaBirds className="h-full w-full ">
-          <div className="flex h-screen items-center justify-center">
+          <div className="flex h-[95dvh] items-center justify-center">
             <h1 className="present text-8xl font-bold text-white">
               {text.split("").map((c, i) => (
                 <span
                   key={i}
                   className="char inline-block"
-                  style={{ animationDelay: `${i * 0.2}s` }}
+                  style={{ animationDelay: `${i * 1}s` }}
                 >
                   {c === " " ? "\u00A0" : c}
                 </span>
               ))}
             </h1>
           </div>
-          {/* </VantaHalo> */}
+          <p
+            className={`text-center text-3xl text-amber-50 transition-all duration-1000 flex justify-center gap-5
+        ${show ? "opacity-100 translate-y-0 animate-bounce" : "opacity-0 translate-y-10"}`}
+          >
+            <FaArrowUp />
+            pull up
+            <FaArrowUp />
+          </p>
         </VantaBirds>
       </header>
-      <main className="bg-black">
-        <div className="h-[60dvh] flex justify-center items-center ">
+      <main className="bg-black ">
+        <div className="h-[120dvh] flex justify-center items-center ">
           <div className="text-5xl text-teal-100 flex animate-[blink_1s_infinite] ">
             <FaDownLong />
             <p className=" text-center "> keep scolling down </p>
@@ -138,7 +179,7 @@ const Home = () => {
             <div className=" pt-10 pr-5 pl-5">
               <div className="w-full flex justify-between gap-10 ">
                 {/* เส้นแสดงปี */}
-                <div className="hidden md:block">
+                <div className="hidden md:block shrink-0">
                   <ScrollTimelineIndicator
                     targetRef={contentRef}
                     height={1000}
@@ -210,12 +251,12 @@ const Home = () => {
         <div className="h-[20dvh]"></div>
         <VantaBirds className="h-full w-full ">
           <section className="skill">
-            <div className=" h-screen">
+            <div className=" min-h-screen">
               <div className="flex justify-center gap-3">
                 <h2 className="">skill</h2>
                 <Dialog className="">
                   <DialogTrigger asChild>
-                    <button className=" my-auto h-20 w-20inline-flex items-center justify-center">
+                    <button className="bg-blue-100 my-auto h-20 w-20inline-flex items-center justify-center">
                       <GiBrain className="size-17 text-rose-400" />
                     </button>
                   </DialogTrigger>
@@ -229,7 +270,7 @@ const Home = () => {
                   </DialogContent>
                 </Dialog>
               </div>
-              <ul className="  flex justify-center gap-4 flex-wrap mt-30 w-[60%] mx-auto">
+              <ul className="  flex justify-center gap-10 flex-wrap mt-30 w-[60%] mx-auto">
                 {skill.map((i, index) => (
                   <li key={index}>
                     <Card className="relative mx-auto h-80  w-60 max-w-50 ">
@@ -260,7 +301,11 @@ const Home = () => {
         <section className="Myprojec h-screen">
           <div className=" ">
             <div className="text-center ">
-              <span className="text-pink-300 text-5xl font-bold flex justify-center gap-2 "><IoPawSharp />Maipaws Project<IoPawSharp /></span>
+              <span className="text-pink-300 text-5xl font-bold flex justify-center gap-2 ">
+                <IoPawSharp />
+                Maipaws Project
+                <IoPawSharp />
+              </span>
               <p className="w-1/2 mx-auto text-amber-50 pt-5">
                 MaiPaws is a full-stack pet e-commerce web application designed
                 with a strong focus on user experience and brand identity. The
@@ -283,22 +328,24 @@ const Home = () => {
             </div>
             <div className="flex justify-center pt-10">
               <a href="https://jsd-project-group-2.vercel.app/" target="blank">
-              <video
-                className="max-h-[60dvh] rounded-4xl"
-                src="/maipaws.mp4"
-                autoPlay
-                loop
-                muted
-                preload="auto"
-                playsInline
-              ></video>
+                <video
+                  className="max-h-[60dvh] rounded-4xl"
+                  src="/maipaws.mp4"
+                  autoPlay
+                  loop
+                  muted
+                  preload="auto"
+                  playsInline
+                ></video>
               </a>
             </div>
           </div>
         </section>
       </main>
       <footer>
-        <section className="Contect"></section>
+        <section className="Contact relative min-h-[80vh] overflow-hidden">
+          <Contact/>
+        </section>
       </footer>
     </>
   );

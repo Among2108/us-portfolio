@@ -21,19 +21,20 @@ export default function SlideInLeft({
   }, [threshold]);
 
   return (
+      <div ref={ref} style={{ overflow: "hidden" }}>
     <div
-      ref={ref}
       style={{
         opacity: show ? 1 : 0,
-        // 🔽 เปลี่ยนตรงนี้: จาก +distance เป็น -distance
         transform: show ? "translateX(0px)" : `translateX(-${distance}px)`,
         transitionProperty: "transform, opacity",
         transitionDuration: `${duration}ms`,
         transitionDelay: `${delay}ms`,
         transitionTimingFunction: easing,
+        willChange: "transform, opacity",
       }}
     >
       {children}
     </div>
-  );
+  </div>
+);
 }

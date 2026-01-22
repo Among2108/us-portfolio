@@ -19,7 +19,7 @@
   --card-foreground: oklch(0.129 0.042 264.695);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
+  --primary: oklch(54.107% 0.05393 269.052);
   --primary-foreground: oklch(0.984 0.003 247.858);
   --secondary: oklch(0.968 0.007 247.896);
   --secondary-foreground: oklch(0.208 0.042 265.755);
@@ -54,30 +54,27 @@
 }
 
 .char {
-  animation-name: charFloat;
-  animation-duration: 4s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
+  opacity: 0;
+  transform: translateY(30px) scale(0.8);
+  animation: popUp 0.6s ease-out forwards;
 }
 
-@keyframes charFloat {
+@keyframes popUp {
   0% {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px) scale(0.8);
   }
-  20% {
-    opacity: 2;
-    transform: translateY(0);
-  }
-  90% {
-    opacity: 2;
-    transform: translateY(0);
+  60% {
+    opacity: 1;
+    transform: translateY(-6px) scale(1.05);
   }
   100% {
-    opacity: 0;
-    transform: translateY(-20px);
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
+
+
 @keyframes blink {
   50% { opacity: 0; }
 }
@@ -124,12 +121,12 @@ h2  {
   font-weight: 500;
   font-style: italic;
   font-size: 60px;
-  color:#70caff ;
+  ;
 }
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #0c17eb;
   text-decoration: inherit;
 }
 a:hover {
@@ -153,7 +150,7 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #312c79;
   cursor: pointer;
   transition: border-color 0.25s;
 }
