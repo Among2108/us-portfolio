@@ -34,7 +34,7 @@ const Contact = () => {
   // ✅ ประกาศ autoplay ให้เรียบร้อย
   const autoplay = useRef(
     Autoplay({
-      delay: 500,
+      delay: 800,
       stopOnInteraction: false,
       stopOnMouseEnter: true,
     }),

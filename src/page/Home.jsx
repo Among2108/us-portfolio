@@ -119,8 +119,9 @@ const refreshSkillCount = () => {
 
   return (
     <>
-      <header>
-        <VantaBirds className="h-full w-full ">
+ <header className="relative bg-black overflow-hidden">
+  <div className="pointer-events-none absolute left-0 right-0 bottom-0 h-[2px] bg-black" />
+  <VantaBirds className="block h-full w-full">
           <div className="flex h-[95dvh] items-center justify-center px-4">
             <h1 className="present text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white text-center">
               {text.split("").map((c, i) => (
