@@ -151,8 +151,8 @@ const refreshSkillCount = () => {
       </header>
 
       <main className="bg-black ">
-        <div className="h-[120dvh] flex justify-center items-center px-4">
-          <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-teal-100 flex items-center gap-2 sm:gap-4 animate-[blink_1s_infinite] ">
+        <div className="h-[80dvh] flex justify-center items-center px-4">
+          <div className="text-xl sm:text-2xl md:text-3xl text-teal-100 flex items-center gap-2 sm:gap-4 animate-[blink_1s_infinite] ">
             <FaDownLong className="shrink-0" />
             <p className="text-center"> keep scrolling down </p>
             <FaDownLong className="shrink-0" />
@@ -354,11 +354,10 @@ const refreshSkillCount = () => {
         <li key={index}>
           <Card
             className="
-              cursor-pointer
               relative mx-auto h-40 w-40 sm:h-48 sm:w-48 md:h-56 md:w-56 lg:h-60 lg:w-60
               transition-transform duration-300 ease-out
               hover:-translate-y-2 hover:rotate-1
-              focus-within:ring-2 focus-within:ring-amber-400
+              focus-within:ring-2 focus-within:ring-amber-400 
             "
             role="button"
             tabIndex={0}
@@ -384,8 +383,6 @@ const refreshSkillCount = () => {
       ))}
     </ul>
   </div>
-
-  <div className="h-[20dvh]" />
 </section>
         </VantaBirds>
 
