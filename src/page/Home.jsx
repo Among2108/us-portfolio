@@ -36,6 +36,8 @@ const Home = () => {
     { name: "Nodejs", pic: "/node-new.png" },
     { name: "Expressjs", pic: "/1_HkM78Z1G5UKqQNCHwBHRfA.png" },
     { name: "Figma", pic: "/Figma.webp" },
+     { name: "MongoDB", pic: "/mongodb.png" },
+     { name: "postgresql", pic:"/sql.png"}
   ];
 
 const handleAddToCart = (skill) => {
@@ -52,10 +54,7 @@ const handleAddToCart = (skill) => {
   stored.push(skill);
   localStorage.setItem("skills", JSON.stringify(stored));
 
-  // ✅ update count
   setSkillCount(stored.length);
-
-  // ✅ trigger badge animation
   setBadgeBump(true);
   setTimeout(() => setBadgeBump(false), 300);
 
@@ -74,10 +73,7 @@ const refreshSkillCount = () => {
   const [locked, setLocked] = useState(true);
   const [badgeBump, setBadgeBump] = useState(false);
 
-
-  // ✅ FIX: Lock scroll แบบไม่กระพริบ (กัน layout shift ตอน scrollbar โผล่/หาย)
   useEffect(() => {
-    // กัน browser restore scroll ตอน refresh
     if ("scrollRestoration" in window.history) {
       window.history.scrollRestoration = "manual";
     }
@@ -101,7 +97,7 @@ const refreshSkillCount = () => {
     const timer = setTimeout(() => {
       document.body.classList.remove("scroll-lock");
 
-      const top = document.body.style.top; // "-123px"
+      const top = document.body.style.top;
       document.body.style.top = "";
       document.body.style.paddingRight = "";
 
@@ -125,8 +121,8 @@ const refreshSkillCount = () => {
     <>
       <header>
         <VantaBirds className="h-full w-full ">
-          <div className="flex h-[95dvh] items-center justify-center">
-            <h1 className="present text-8xl font-bold text-white">
+          <div className="flex h-[95dvh] items-center justify-center px-4">
+            <h1 className="present text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white text-center">
               {text.split("").map((c, i) => (
                 <span
                   key={i}
@@ -139,7 +135,7 @@ const refreshSkillCount = () => {
             </h1>
           </div>
           <p
-            className={`text-center text-3xl text-amber-50 transition-all duration-1000 flex justify-center gap-5
+            className={`text-center text-xl sm:text-2xl md:text-3xl text-amber-50 transition-all duration-1000 flex justify-center gap-3 sm:gap-5 px-4
         ${
           show
             ? "opacity-100 translate-y-0 animate-bounce"
@@ -154,33 +150,33 @@ const refreshSkillCount = () => {
       </header>
 
       <main className="bg-black ">
-        <div className="h-[120dvh] flex justify-center items-center ">
-          <div className="text-5xl text-teal-100 flex animate-[blink_1s_infinite] ">
-            <FaDownLong />
-            <p className=" text-center "> keep scolling down </p>
-            <FaDownLong />
+        <div className="h-[120dvh] flex justify-center items-center px-4">
+          <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-teal-100 flex items-center gap-2 sm:gap-4 animate-[blink_1s_infinite] ">
+            <FaDownLong className="shrink-0" />
+            <p className="text-center"> keep scrolling down </p>
+            <FaDownLong className="shrink-0" />
           </div>
         </div>
 
         <ScrollReveal distance={200} fadeRange={1200}>
-          <div className="flex justify-between h-[70dvh] pl-10 ">
-            <div className=" w-1/2 flex flex-col gap-10">
+          <div className="flex flex-col lg:flex-row  lg:justify-between min-h-[70dvh] px-4 sm:px-6 lg:pl-10 gap-8 lg:gap-0">
+            <div className="w-full lg:w-1/2 flex flex-col gap-6 lg:gap-10">
               <div>
-                <h2 className="">junior software </h2>
-                <h2 className="">developer</h2>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl">junior software </h2>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl">developer</h2>
               </div>
 
-              <div className="flex justify-center">
+              <div className="flex justify-center lg:justify-start">
                 <a
                   href="https://drive.google.com/file/d/13jMfuLICYL2a-vXtjmifx2LlIHVVhnCa/view?usp=sharing"
                   target="blank"
                 >
-                  <button className=" mx-auto ">resume</button>
+                  <button className="mx-auto">resume</button>
                 </a>
               </div>
 
-              <div className="mt-10">
-                <p className="text-2xl text-white ">
+              <div className="mt-4 lg:mt-10">
+                <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white ">
                   I am a Junior Software Developer with a strong interest in
                   building modern, user-friendly web applications. I enjoy
                   working with React, JavaScript, and Tailwind CSS, especially
@@ -196,17 +192,17 @@ const refreshSkillCount = () => {
               </div>
             </div>
 
-            <div className="">
+            <div className="w-full lg:w-auto flex justify-center lg:justify-end">
               <img
                 src="/IMG_8105.jpg"
                 alt=""
-                className="h-full w-auto object-contain rounded-l-full   "
+                className="h-64 max-h-screen sm:h-80 md:h-96 lg:h-full w-auto object-contain lg:rounded-l-full"
               />
             </div>
           </div>
 
-          <div className="h-full pt-10 ">
-            <h2 className="text-center text-4xl font-bold">
+          <div className="h-full pt-10 px-4">
+            <h2 className="text-center text-2xl sm:text-3xl md:text-4xl font-bold">
               {textex.split("").map((char, index) => (
                 <span
                   key={index}
@@ -218,9 +214,8 @@ const refreshSkillCount = () => {
               ))}
             </h2>
 
-            <div className=" pt-10 pr-5 pl-5">
-              <div className="w-full flex justify-between gap-10 ">
-                {/* เส้นแสดงปี */}
+            <div className="pt-10 pr-2 sm:pr-5 pl-2 sm:pl-5">
+              <div className="w-full flex flex-col md:flex-row justify-between gap-6 md:gap-10">
                 <div className="hidden md:block shrink-0">
                   <ScrollTimelineIndicator
                     targetRef={contentRef}
@@ -231,21 +226,20 @@ const refreshSkillCount = () => {
                   />
                 </div>
 
-                {/* ขวา: ประสบการทำงาน */}
-                <div ref={contentRef} className="">
-                  <section className="rounded-xl  p-6 shadow-sm">
+                <div ref={contentRef} className="w-full">
+                  <section className="rounded-xl p-4 sm:p-6 shadow-sm">
                     <SlideInLeft>
-                      <div className="h-dvh flex gap-3  items-center ">
+                      <div className="min-h-[50vh] md:h-dvh flex flex-col md:flex-row gap-4 sm:gap-6 items-center py-8">
                         <img
                           src="/Which Apple Products Are Really Worth Your Money_ (Updated).jpg"
                           alt=""
-                          className="w-1/2 rounded-4xl"
+                          className="w-full md:w-1/2 rounded-2xl sm:rounded-4xl"
                         />
-                        <div className="">
-                          <h3 className="text-3xl text-blue-300 font-semibold">
+                        <div className="w-full md:w-1/2">
+                          <h3 className="text-xl sm:text-2xl md:text-3xl text-blue-300 font-semibold">
                             Icare (Apple Provider)
                           </h3>
-                          <p className="mt-2 text-xl text-white  ">
+                          <p className="mt-2 text-sm sm:text-base md:text-lg lg:text-xl text-white">
                             Provided customer service and administrative support
                             at an Apple service center Diagnosed and repaired
                             iPhone hardware issues following service procedures
@@ -260,12 +254,17 @@ const refreshSkillCount = () => {
                     </SlideInLeft>
 
                     <SlideInRight>
-                      <div className="h-dvh flex gap-3  items-center">
-                        <div className="ml-auto ">
-                          <h3 className="text-3xl text-blue-300 font-semibold text-right">
-                            Genaration Thailand
+                      <div className="min-h-[50vh] md:h-dvh flex flex-col md:flex-row-reverse gap-4 sm:gap-6 items-center py-8">
+                        <img
+                          src="/032.png"
+                          alt=""
+                          className="w-full md:w-1/2 rounded-2xl sm:rounded-4xl"
+                        />
+                        <div className="w-full md:w-1/2">
+                          <h3 className="text-xl sm:text-2xl md:text-3xl text-blue-300 font-semibold text-left md:text-right">
+                            Generation Thailand
                           </h3>
-                          <p className="mt-2 text-xl text-white  ml-auto text-right">
+                          <p className="mt-2 text-sm sm:text-base md:text-lg lg:text-xl text-white text-left md:text-right">
                             Generation Bootcamp Thailand My experience at
                             Generation Thailand Bootcamp provided a strong
                             foundation for my journey as a Junior Software
@@ -278,11 +277,6 @@ const refreshSkillCount = () => {
                             in a professional software development environment.
                           </p>
                         </div>
-                        <img
-                          src="/032.png"
-                          alt=""
-                          className="w-1/2 rounded-4xl"
-                        />
                       </div>
                     </SlideInRight>
                   </section>
@@ -296,9 +290,9 @@ const refreshSkillCount = () => {
 
         <VantaBirds className="h-full w-full ">
         <section className="skill">
-  <div className="min-h-screen">
-    <div className="flex justify-center gap-3 pt-3">
-      <h2 className="">skill</h2>
+  <div className="min-h-screen px-4">
+    <div className="flex justify-center items-center gap-3 pt-3">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl">skill</h2>
 
       <Dialog
         onOpenChange={(open) => {
@@ -312,19 +306,19 @@ const refreshSkillCount = () => {
           <button
             className="
               relative bg-blue-100 my-auto
-              h-20 w-20 inline-flex items-center justify-center
+              h-16 w-16 sm:h-20 sm:w-20 inline-flex items-center justify-center
               rounded-full
             "
           >
-            <GiBrain className="size-17 text-rose-400" />
+            <GiBrain className="text-4xl sm:text-5xl text-rose-400" />
 
             {skillCount > 0 && (
                 <span
     className={`
       absolute -top-2 -right-2
-      h-6 min-w-6 px-1
+      h-5 min-w-5 sm:h-6 sm:min-w-6 px-1
       rounded-full bg-red-500
-      text-white text-12 font-bold
+      text-white text-xs sm:text-sm font-bold
       flex items-center justify-center
       transition-transform duration-300
       ${badgeBump ? "scale-125 animate-bounce" : "scale-100"}
@@ -338,10 +332,10 @@ const refreshSkillCount = () => {
 
         <DialogContent
           showCloseButton={false}
-          className="w-[80vw] max-w-[900px]"
+          className="w-[95vw] sm:w-[85vw] md:w-[80vw] max-w-[900px]"
         >
           <DialogDescription>
-            <SkillCart   onChange={() => {
+            <SkillCart onChange={() => {
     const stored = JSON.parse(localStorage.getItem("skills")) || [];
     setSkillCount(stored.length);
   }} />
@@ -349,16 +343,18 @@ const refreshSkillCount = () => {
         </DialogContent>
       </Dialog>
     </div>
-  <h3 className="text-4xl text-white text-center pt-10 animate-pulse">
+    
+    <h3 className="text-2xl sm:text-3xl md:text-4xl text-white text-center pt-10 animate-pulse px-4">
       click!! to up skill
     </h3>
-    <ul className="flex justify-center gap-10 flex-wrap mt-12 w-[60%] mx-auto">
+    
+    <ul className="flex justify-center gap-4 sm:gap-6 md:gap-8 lg:gap-10 flex-wrap mt-8 sm:mt-12 w-[95%] sm:w-[85%] md:w-[75%] lg:w-[60%] mx-auto">
       {skill.map((i, index) => (
         <li key={index}>
           <Card
             className="
               cursor-pointer
-              relative mx-auto h-60 w-60
+              relative mx-auto h-40 w-40 sm:h-48 sm:w-48 md:h-56 md:w-56 lg:h-60 lg:w-60
               transition-transform duration-300 ease-out
               hover:-translate-y-2 hover:rotate-1
               focus-within:ring-2 focus-within:ring-amber-400
@@ -376,35 +372,32 @@ const refreshSkillCount = () => {
             <img
               src={i.pic}
               alt={i.name}
-              className="h-40 w-full object-contain"
+              className="h-28 sm:h-32 md:h-36 lg:h-40 w-full object-contain pt-2"
               loading="lazy"
             />
-            <CardHeader>
-              <CardTitle>{i.name}</CardTitle>
+            <CardHeader className="p-2 sm:p-4">
+             
             </CardHeader>
           </Card>
         </li>
       ))}
     </ul>
-
-  
   </div>
 
   <div className="h-[20dvh]" />
 </section>
-
         </VantaBirds>
 
-        <section className="Myprojec h-screen">
-          <div className=" ">
-            <div className="text-center ">
-              <span className="text-pink-300 text-5xl font-bold flex justify-center gap-2 ">
+        <section className="Myprojec min-h-screen py-10 px-4">
+          <div className="">
+            <div className="text-center">
+              <span className="text-pink-300 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold flex flex-wrap justify-center items-center gap-2">
                 <IoPawSharp />
                 Maipaws Project
                 <IoPawSharp />
               </span>
 
-              <p className="w-1/2 mx-auto text-amber-50 pt-5">
+              <p className="w-[95%] sm:w-[85%] md:w-[75%] lg:w-1/2 mx-auto text-amber-50 pt-5 text-sm sm:text-base md:text-lg">
                 MaiPaws is a full-stack pet e-commerce web application designed
                 with a strong focus on user experience and brand identity. The
                 platform features a modern, pet-centric interface with clearly
@@ -425,10 +418,10 @@ const refreshSkillCount = () => {
               </p>
             </div>
 
-            <div className="flex justify-center pt-10">
-              <a href="https://jsd-project-group-2.vercel.app/" target="blank">
+            <div className="flex justify-center pt-6 sm:pt-10">
+              <a href="https://jsd-project-group-2.vercel.app/" target="blank" className="w-full max-w-4xl px-4">
                 <video
-                  className="max-h-[60dvh] rounded-4xl"
+                  className="w-full max-h-[60dvh] rounded-2xl sm:rounded-3xl md:rounded-4xl"
                   src="/maipaws.mp4"
                   autoPlay
                   loop

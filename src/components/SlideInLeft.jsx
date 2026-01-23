@@ -25,7 +25,7 @@ export default function SlideInLeft({
     <div
       style={{
         opacity: show ? 1 : 0,
-        transform: show ? "translateX(0px)" : `translateX(-${distance}px)`,
+        transform: show ? "translateX(0px)" : `translateX(${distance}px)`,
         transitionProperty: "transform, opacity",
         transitionDuration: `${duration}ms`,
         transitionDelay: `${delay}ms`,
