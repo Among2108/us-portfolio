@@ -392,7 +392,7 @@ const refreshSkillCount = () => {
 
   <div className="h-[20dvh]" />
 </section>
->
+
         </VantaBirds>
 
         <section className="Myprojec h-screen">
