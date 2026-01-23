@@ -38,72 +38,88 @@ const Home = () => {
     { name: "Figma", pic: "/Figma.webp" },
   ];
 
-  const handleAddToCart = (skill) => {
-    // 1. ดึงข้อมูลเก่าจาก localStorage
-    const stored = JSON.parse(localStorage.getItem("skills")) || [];
+const handleAddToCart = (skill) => {
+  const stored = JSON.parse(localStorage.getItem("skills")) || [];
 
-    // 2. เช็คว่ามี skill นี้แล้วหรือยัง
-    const exists = stored.find((item) => item.name === skill.name);
-
-    if (exists) {
-      toast.warning("Skill นี้ถูกเพิ่มแล้ว", {
-        description: skill.name,
-      });
-      return;
-    }
-
-    // 3. เพิ่ม skill ใหม่
-    stored.push(skill);
-
-    // 4. เซฟกลับเข้า localStorage
-    localStorage.setItem("skills", JSON.stringify(stored));
-
-    toast.success("เพิ่ม Skill สำเร็จ 🎉", {
+  const exists = stored.find((item) => item.name === skill.name);
+  if (exists) {
+    toast.warning("Skill นี้ถูกเพิ่มแล้ว", {
       description: skill.name,
     });
-  };
+    return;
+  }
 
+  stored.push(skill);
+  localStorage.setItem("skills", JSON.stringify(stored));
+
+  // ✅ update count
+  setSkillCount(stored.length);
+
+  // ✅ trigger badge animation
+  setBadgeBump(true);
+  setTimeout(() => setBadgeBump(false), 300);
+
+  toast.success("เพิ่ม Skill สำเร็จ 🎉", {
+    description: skill.name,
+  });
+};
+
+const refreshSkillCount = () => {
+  const stored = JSON.parse(localStorage.getItem("skills")) || [];
+  setSkillCount(stored.length);
+};
+
+  const [skillCount, setSkillCount] = useState(0);
   const [show, setShow] = useState(false);
   const [locked, setLocked] = useState(true);
+  const [badgeBump, setBadgeBump] = useState(false);
+
 
   // ✅ FIX: Lock scroll แบบไม่กระพริบ (กัน layout shift ตอน scrollbar โผล่/หาย)
-  // useEffect(() => {
-  //   // กัน browser restore scroll ตอน refresh
-  //   if ("scrollRestoration" in window.history) {
-  //     window.history.scrollRestoration = "manual";
-  //   }
+  useEffect(() => {
+    // กัน browser restore scroll ตอน refresh
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
 
-  //   const y = window.scrollY;
-  //   const scrollbarWidth =
-  //     window.innerWidth - document.documentElement.clientWidth;
+    const updateCount = () => {
+      const stored = JSON.parse(localStorage.getItem("skills")) || [];
+      setSkillCount(stored.length);
+    };
+    updateCount();
 
-  //   document.body.classList.add("scroll-lock");
-  //   document.body.style.top = `-${y}px`;
-  //   document.body.style.paddingRight = scrollbarWidth
-  //     ? `${scrollbarWidth}px`
-  //     : "0px";
+    const y = window.scrollY;
+    const scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
 
-  //   const timer = setTimeout(() => {
-  //     document.body.classList.remove("scroll-lock");
+    document.body.classList.add("scroll-lock");
+    document.body.style.top = `-${y}px`;
+    document.body.style.paddingRight = scrollbarWidth
+      ? `${scrollbarWidth}px`
+      : "0px";
 
-  //     const top = document.body.style.top; // "-123px"
-  //     document.body.style.top = "";
-  //     document.body.style.paddingRight = "";
+    const timer = setTimeout(() => {
+      document.body.classList.remove("scroll-lock");
 
-  //     const restoreY = parseInt(top || "0", 10) * -1;
-  //     window.scrollTo({ top: restoreY, left: 0, behavior: "auto" });
+      const top = document.body.style.top; // "-123px"
+      document.body.style.top = "";
+      document.body.style.paddingRight = "";
 
-  //     setLocked(false);
-  //     setShow(true);
-  //   }, 5500);
+      const restoreY = parseInt(top || "0", 10) * -1;
+      window.scrollTo({ top: restoreY, left: 0, behavior: "auto" });
 
-  //   return () => {
-  //     clearTimeout(timer);
-  //     document.body.classList.remove("scroll-lock");
-  //     document.body.style.top = "";
-  //     document.body.style.paddingRight = "";
-  //   };
-  // }, []);
+      setLocked(false);
+      setShow(true);
+    }, 5500);
+    window.addEventListener("storage", updateCount);
+    return () => {
+      clearTimeout(timer);
+      document.body.classList.remove("scroll-lock");
+      document.body.style.top = "";
+      document.body.style.paddingRight = "";
+      window.removeEventListener("storage", updateCount);
+    };
+  }, []);
 
   return (
     <>
@@ -279,57 +295,104 @@ const Home = () => {
         <div className="h-[20dvh]"></div>
 
         <VantaBirds className="h-full w-full ">
-          <section className="skill">
-            <div className=" min-h-screen">
-              <div className="flex justify-center gap-3">
-                <h2 className="">skill</h2>
+        <section className="skill">
+  <div className="min-h-screen">
+    <div className="flex justify-center gap-3 pt-3">
+      <h2 className="">skill</h2>
 
-                <Dialog className="">
-                  <DialogTrigger asChild>
-                    <button className="bg-blue-100 my-auto h-20 w-20inline-flex items-center justify-center">
-                      <GiBrain className="size-17 text-rose-400" />
-                    </button>
-                  </DialogTrigger>
+      <Dialog
+        onOpenChange={(open) => {
+          if (open) {
+            const stored = JSON.parse(localStorage.getItem("skills")) || [];
+            setSkillCount(stored.length);
+          }
+        }}
+      >
+        <DialogTrigger asChild>
+          <button
+            className="
+              relative bg-blue-100 my-auto
+              h-20 w-20 inline-flex items-center justify-center
+              rounded-full
+            "
+          >
+            <GiBrain className="size-17 text-rose-400" />
 
-                  <DialogContent
-                    showCloseButton={false}
-                    className="w-[80vw] max-w-[900px] sm:max-w-[900px]"
-                  >
-                    <DialogDescription>
-                      <SkillCart />
-                    </DialogDescription>
-                  </DialogContent>
-                </Dialog>
-              </div>
+            {skillCount > 0 && (
+                <span
+    className={`
+      absolute -top-2 -right-2
+      h-6 min-w-6 px-1
+      rounded-full bg-red-500
+      text-white text-12 font-bold
+      flex items-center justify-center
+      transition-transform duration-300
+      ${badgeBump ? "scale-125 animate-bounce" : "scale-100"}
+    `}
+  >
+                {skillCount > 99 ? "99+" : skillCount}
+              </span>
+            )}
+          </button>
+        </DialogTrigger>
 
-              <ul className="  flex justify-center gap-10 flex-wrap mt-30 w-[60%] mx-auto">
-                {skill.map((i, index) => (
-                  <li key={index}>
-                    <Card className="relative mx-auto h-80  w-60 max-w-50 ">
-                      <img
-                        src={i.pic}
-                        alt="Event cover"
-                        className=" w-50 h-40"
-                      />
-                      <CardHeader>
-                        <CardTitle>{i.name}</CardTitle>
-                      </CardHeader>
-                      <CardFooter>
-                        <Button
-                          className="w-full  hover:text-amber-300"
-                          onClick={() => handleAddToCart(i)}
-                        >
-                          <FiStar className="size-5" />
-                        </Button>
-                      </CardFooter>
-                    </Card>
-                  </li>
-                ))}
-              </ul>
-            </div>
+        <DialogContent
+          showCloseButton={false}
+          className="w-[80vw] max-w-[900px]"
+        >
+          <DialogDescription>
+            <SkillCart   onChange={() => {
+    const stored = JSON.parse(localStorage.getItem("skills")) || [];
+    setSkillCount(stored.length);
+  }} />
+          </DialogDescription>
+        </DialogContent>
+      </Dialog>
+    </div>
+  <h3 className="text-4xl text-white text-center pt-10 animate-pulse">
+      click!! to up skill
+    </h3>
+    <ul className="flex justify-center gap-10 flex-wrap mt-12 w-[60%] mx-auto">
+      {skill.map((i, index) => (
+        <li key={index}>
+          <Card
+            className="
+              cursor-pointer
+              relative mx-auto h-60 w-60
+              transition-transform duration-300 ease-out
+              hover:-translate-y-2 hover:rotate-1
+              focus-within:ring-2 focus-within:ring-amber-400
+            "
+            role="button"
+            tabIndex={0}
+            onClick={() => handleAddToCart(i)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                handleAddToCart(i);
+              }
+            }}
+          >
+            <img
+              src={i.pic}
+              alt={i.name}
+              className="h-40 w-full object-contain"
+              loading="lazy"
+            />
+            <CardHeader>
+              <CardTitle>{i.name}</CardTitle>
+            </CardHeader>
+          </Card>
+        </li>
+      ))}
+    </ul>
 
-            <div className="h-[20dvh]"></div>
-          </section>
+  
+  </div>
+
+  <div className="h-[20dvh]" />
+</section>
+>
         </VantaBirds>
 
         <section className="Myprojec h-screen">
