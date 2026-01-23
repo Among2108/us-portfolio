@@ -4,7 +4,7 @@ import ScrollTimelineIndicator from "../components/ScrollTimelineIndicator";
 import ScrollReveal from "../components/ScrollReveal";
 import SlideInLeft from "../components/SlideInLeft";
 import SlideInRight from "../components/SlideInRight";
-import Contact from "@/components/contact";
+import Contact from "@/components/Contact";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
