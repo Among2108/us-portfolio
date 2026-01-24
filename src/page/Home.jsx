@@ -5,6 +5,7 @@ import ScrollReveal from "../components/ScrollReveal";
 import SlideInLeft from "../components/SlideInLeft";
 import SlideInRight from "../components/SlideInRight";
 import Contact from "@/components/Contact";
+import { Meteors } from "@/components/ui/meteors";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -28,8 +29,6 @@ const Home = () => {
   const contentRef = useRef(null);
 
   const skill = [
-    { name: "HTML", pic: "/HTML.png" },
-    { name: "CSS", pic: "/CSS.png" },
     { name: "Java", pic: "/Java.jpg" },
     { name: "Tailwind", pic: "/Tailwind.png" },
     { name: "React", pic: "/React.png" },
@@ -119,7 +118,7 @@ const refreshSkillCount = () => {
 
   return (
     <>
- <header className="relative bg-black overflow-hidden">
+ <header className=" relative  bg-black overflow-hidden">
   <div className="pointer-events-none absolute left-0 right-0 bottom-0 h-[2px] bg-black" />
   <VantaBirds className="block h-full w-full">
           <div className="flex h-[95dvh] items-center justify-center px-4">
@@ -151,11 +150,14 @@ const refreshSkillCount = () => {
       </header>
 
       <main className="bg-black ">
-        <div className="h-[80dvh] flex justify-center items-center px-4">
-          <div className="text-xl sm:text-2xl md:text-3xl text-teal-100 flex items-center gap-2 sm:gap-4 animate-[blink_1s_infinite] ">
-            <FaDownLong className="shrink-0" />
-            <p className="text-center"> keep scrolling down </p>
-            <FaDownLong className="shrink-0" />
+    
+        <div className="relative h-[80dvh] flex justify-center items-center px-4">
+                <Meteors number={80} />
+
+          <div className="text-xl sm:text-2xl md:text-5xl text-teal-100 flex items-center gap-2 sm:gap-4 animate-[blink_3s_infinite] ">
+           
+            <p className="text-center"> Hello stranger </p>
+           
           </div>
         </div>
 
