@@ -58,8 +58,18 @@ const Contact = () => {
       <div className="absolute inset-0 bg-black/40 z-[1]" />
 
       {/* Content */}
-      <div className="relative z-10 min-h-[80dvh] flex flex-col items-center justify-around text-white px-4">
-        <h2 className="text-4xl text-rose-400 font-bold flex gap-1 ">
+      <div className="relative z-10 min-h-[80dvh] flex flex-col flex-wrap items-center justify-around text-white px-4">
+        <h3 className="
+    text-xl
+    sm:text-4xl
+    md:text-6xl
+    lg:text-7xl
+    xl:text-8xl
+    text-rose-400
+    font-bold
+    flex gap-1
+    leading-none
+  ">
          {"Contact Me!!".split("").map((c, i) => (
     <span
       key={i}
@@ -69,7 +79,7 @@ const Contact = () => {
       {c === " " ? "\u00A0" : c}
     </span>
   ))}
-        </h2>
+        </h3>
         <div className="flex flex-col justify-center items-center gap-3">
           <FaArrowCircleLeft className="size-10 animate-arrowRight" />
           <Carousel
