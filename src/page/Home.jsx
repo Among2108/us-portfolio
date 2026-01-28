@@ -29,7 +29,7 @@ const Home = () => {
   const contentRef = useRef(null);
 
   const skill = [
-    { name: "Java", pic: "/Java.jpg" },
+    { name: "JavaScript", pic: "/Java.jpg" },
     { name: "Tailwind", pic: "/Tailwind.png" },
     { name: "React", pic: "/React.png" },
     { name: "Nodejs", pic: "/node-new.png" },
@@ -203,95 +203,7 @@ const refreshSkillCount = () => {
               />
             </div>
           </div>
-
-          <div className="h-full pt-10 px-4">
-            <h2 className="text-center text-2xl sm:text-3xl md:text-4xl font-bold">
-              {textex.split("").map((char, index) => (
-                <span
-                  key={index}
-                  className="rainbow-char"
-                  style={{ animationDelay: `${index * 0.15}s` }}
-                >
-                  {char}
-                </span>
-              ))}
-            </h2>
-
-            <div className="pt-10 pr-2 sm:pr-5 pl-2 sm:pl-5">
-              <div className="w-full flex flex-col md:flex-row justify-between gap-6 md:gap-10">
-                <div className="hidden md:block shrink-0">
-                  <ScrollTimelineIndicator
-                    targetRef={contentRef}
-                    height={1000}
-                    topOffset={96}
-                    startLabel="2024"
-                    endLabel="2026"
-                  />
-                </div>
-
-                <div ref={contentRef} className="w-full">
-                  <section className="rounded-xl p-4 sm:p-6 shadow-sm">
-                    <SlideInLeft>
-                      <div className="min-h-[50vh] md:h-dvh flex flex-col md:flex-row gap-4 sm:gap-6 items-center py-8">
-                        <img
-                          src="/Which Apple Products Are Really Worth Your Money_ (Updated).jpg"
-                          alt=""
-                          className="w-full md:w-1/2 rounded-2xl sm:rounded-4xl"
-                        />
-                        <div className="w-full md:w-1/2">
-                          <h3 className="text-xl sm:text-2xl md:text-3xl text-blue-300 font-semibold">
-                            Icare (Apple Provider)
-                          </h3>
-                          <p className="mt-2 text-sm sm:text-base md:text-lg lg:text-xl text-white">
-                            Provided customer service and administrative support
-                            at an Apple service center Diagnosed and repaired
-                            iPhone hardware issues following service procedures
-                            Managed repair records, customer data, and service
-                            documentation Communicated with customers to explain
-                            technical issues and repair solutions Developed
-                            strong problem-solving, attention to detail, and
-                            service mindset
-                          </p>
-                        </div>
-                      </div>
-                    </SlideInLeft>
-
-                    <SlideInRight>
-                      <div className="min-h-[50vh] md:h-dvh flex flex-col md:flex-row-reverse gap-4 sm:gap-6 items-center py-8">
-                        <img
-                          src="/032.png"
-                          alt=""
-                          className="w-full md:w-1/2 rounded-2xl sm:rounded-4xl"
-                        />
-                        <div className="w-full md:w-1/2">
-                          <h3 className="text-xl sm:text-2xl md:text-3xl text-blue-300 font-semibold text-left md:text-right">
-                            Generation Thailand
-                          </h3>
-                          <p className="mt-2 text-sm sm:text-base md:text-lg lg:text-xl text-white text-left md:text-right">
-                            Generation Bootcamp Thailand My experience at
-                            Generation Thailand Bootcamp provided a strong
-                            foundation for my journey as a Junior Software
-                            Developer. I gained hands-on experience in building
-                            web applications with JavaScript and React,
-                            practiced real-world development workflows using
-                            Git, and collaborated on team projects. The program
-                            also strengthened my problem-solving, communication,
-                            and adaptability, preparing me to grow confidently
-                            in a professional software development environment.
-                          </p>
-                        </div>
-                      </div>
-                    </SlideInRight>
-                  </section>
-                </div>
-              </div>
-            </div>
-          </div>
-        </ScrollReveal>
-
-        <div className="h-[20dvh]"></div>
-
-        <VantaBirds className="h-full w-full ">
+         <VantaBirds className="h-full w-full ">
         <section className="skill">
   <div className="min-h-screen px-4">
     <div className="flex justify-center items-center gap-3 pt-3">
@@ -387,8 +299,8 @@ const refreshSkillCount = () => {
   </div>
 </section>
         </VantaBirds>
-
-        <section className="Myprojec min-h-screen py-10 px-4">
+  
+  <section className="Myprojec min-h-screen py-10 px-4">
           <div className="">
             <div className="text-center">
               <span className="text-pink-300 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold flex flex-wrap justify-center items-center gap-2">
@@ -433,6 +345,98 @@ const refreshSkillCount = () => {
             </div>
           </div>
         </section>
+
+     
+          <div className="h-full pt-10 px-4">
+            <h2 className="text-center text-2xl sm:text-3xl md:text-4xl font-bold">
+              {textex.split("").map((char, index) => (
+                <span
+                  key={index}
+                  className="rainbow-char"
+                  style={{ animationDelay: `${index * 0.15}s` }}
+                >
+                  {char}
+                </span>
+              ))}
+            </h2>
+
+            <div className="pt-10 pr-2 sm:pr-5 pl-2 sm:pl-5">
+              <div className="w-full flex flex-col md:flex-row justify-between gap-6 md:gap-10">
+                <div className="hidden md:block shrink-0">
+                  <ScrollTimelineIndicator
+                    targetRef={contentRef}
+                    height={1000}
+                    topOffset={96}
+                    startLabel="2024"
+                    endLabel="2026"
+                  />
+                </div>
+
+                <div ref={contentRef} className="w-full">
+                  <section className="rounded-xl p-4 sm:p-6 shadow-sm">
+                    <SlideInLeft>
+                      <div className="min-h-[50vh] md:h-dvh flex flex-col md:flex-row gap-4 sm:gap-6 items-center py-8">
+                        <img
+                          src="/Which Apple Products Are Really Worth Your Money_ (Updated).jpg"
+                          alt=""
+                          className="w-full md:w-1/2 rounded-2xl sm:rounded-4xl"
+                        />
+                        <div className="w-full md:w-1/2">
+                          <h3 className="text-xl sm:text-2xl md:text-3xl text-blue-300 font-semibold">
+                            Icare (Apple Provider)
+                          </h3>
+                          <p className="mt-2 text-sm sm:text-base md:text-lg lg:text-xl text-white">
+                            Provided customer service and administrative support
+                            at an Apple service center Diagnosed and repaired
+                            iPhone hardware issues following service procedures
+                            Managed repair records, customer data, and service
+                            documentation Communicated with customers to explain
+                            technical issues and repair solutions Developed
+                            strong problem-solving, attention to detail, and
+                            service mindset
+                          </p>
+                        </div>
+                      </div>
+                    </SlideInLeft>
+
+                    <SlideInRight>
+                      <div className="min-h-[50vh] md:h-dvh flex flex-col md:flex-row-reverse gap-4 sm:gap-6 items-center py-8">
+                        <img
+                          src="/032.png"
+                          alt=""
+                          className="w-full md:w-1/2 rounded-2xl sm:rounded-4xl"
+                        />
+                        <div className="w-full md:w-1/2">
+                          <h3 className="text-xl sm:text-2xl md:text-3xl text-blue-300 font-semibold text-left md:text-right">
+                            Generation Thailand
+                          </h3>
+                          <p className="mt-2 text-sm sm:text-base md:text-lg lg:text-xl text-white text-left md:text-right">
+                            Generation Bootcamp Thailand My experience at
+                            Generation Thailand Bootcamp provided a strong
+                            foundation for my journey as a Junior Software
+                            Developer. I gained hands-on experience in building
+                            web applications with JavaScript and React,
+                            practiced real-world development workflows using
+                            Git, and collaborated on team projects. The program
+                            also strengthened my problem-solving, communication,
+                            and adaptability, preparing me to grow confidently
+                            in a professional software development environment.
+                          </p>
+                        </div>
+                      </div>
+                    </SlideInRight>
+                  </section>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ScrollReveal>
+
+        <div className="h-[20dvh]"></div>
+
+    
+
+      
       </main>
 
       <footer>
