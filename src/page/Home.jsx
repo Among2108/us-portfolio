@@ -171,7 +171,7 @@ const refreshSkillCount = () => {
 
               <div className="flex justify-center lg:justify-start">
                 <a
-                  href="https://drive.google.com/file/d/13jMfuLICYL2a-vXtjmifx2LlIHVVhnCa/view?usp=sharing"
+                  href="https://drive.google.com/drive/u/1/recent"
                   target="blank"
                 >
                   <button className="mx-auto">resume</button>
