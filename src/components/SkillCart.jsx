@@ -58,8 +58,8 @@ export function SkillCart({ onChange }) {
       <Table>
         <TableHeader>
           <TableRow className="text-2xl">
-            <TableHead>Product</TableHead>
-            <TableHead className="text-center">Skill</TableHead>
+            <TableHead>Skill</TableHead>
+            <TableHead className="text-center">Name</TableHead>
             <TableHead className="text-right">Actions</TableHead>
           </TableRow>
         </TableHeader>
